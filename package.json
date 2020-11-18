@@ -1,0 +1,32 @@
+{
+  "name": "falcor-react-toolkit",
+  "version": "0.1.0",
+  "description": "react falcor toolkit",
+  "main": "dist/falcor-react-toolkit.js",
+  "author": "murayama",
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "dependencies": {
+    "falcor": "2.2.2",
+    "falcor-http-datasource": "0.1.3"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "devDependencies": {
+    "@types/falcor": "2.0.0",
+    "@types/node": "12",
+    "@types/react": "16.9.56",
+    "esbuild": "0.8.10",
+    "prettier": "2.1.2",
+    "react": "17.0.1",
+    "ts-node": "9.0.0",
+    "typescript": "4.0.5"
+  },
+  "scripts": {
+    "build:dev": "NODE_ENV=development node build.js",
+    "build:prod": "NODE_ENV=production node build.js"
+  }
+}
