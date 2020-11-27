@@ -1,5 +1,7 @@
 # falcor-react-toolkit
 
+[![npm version](https://badge.fury.io/js/falcor-react-toolkit.svg)](https://badge.fury.io/js/falcor-react-toolkit)
+
 falcor for react hooks
 
 ## usage

@@ -2,6 +2,7 @@
   "name": "falcor-react-toolkit",
   "version": "0.1.0",
   "description": "react falcor toolkit",
+  "keywords": ["falcor", "react"],
   "main": "dist/falcor-react-toolkit.js",
   "author": "murayama",
   "repository": {
