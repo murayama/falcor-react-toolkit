@@ -9,8 +9,8 @@ import { FalcorProvider } from 'falcor-react-toolkit';
 const model = new Falcor.Model({
   cache: {
     todos: [
-      {name: 'task1', done: false},
-      {name: 'task2', done: true},
+      {name: 'get milk from corner store', done: false},
+      {name: 'withdraw money from ATM', done: true},
     ]
   }
 });

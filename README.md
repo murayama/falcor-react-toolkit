@@ -11,15 +11,14 @@ FalcorProvider
 ```javascript
 import React from 'react';
 import Falcor from 'falcor';
-import {FalcorProvider} from 'falcor-react-toolkit';
+import { FalcorProvider } from 'falcor-react-toolkit';
 
 const model = new Falcor.Model({
   cache: {
     foo: 'bar',
     todos: [
-      {name: 'aaaa'},
-      {name: 'bbbb'},
-      {name: 'cccc'},
+      {name: 'get milk from corner store'},
+      {name: 'withdraw money from ATM'},
     ]
   }
 });
@@ -35,7 +34,7 @@ useFalcor hooks
 
 ```javascript
 import React from 'react';
-import {useFalcor} from 'falcor-react-toolkit';
+import { useFalcor } from 'falcor-react-toolkit';
 
 const App = (props) => {
   const path = ['foo'];
@@ -54,11 +53,11 @@ const App = (props) => {
 };
 ```
 
-use normalizer
+useFalcor with normalizer
 
 ```javascript
 import React from 'react';
-import {useFalcor} from 'falcor-react-toolkit';
+import { useFalcor } from 'falcor-react-toolkit';
 
 const App = (props) => {
   const path = ['todos', {from: 0, to: 10}, ['name']];
@@ -80,4 +79,16 @@ const App = (props) => {
       </div>
       )
 };
+```
+
+useFalcorModel
+
+```javascript
+import React from 'react';
+import { useFalcorModel } from 'falcor-react-toolkit';
+
+const App = (props) => {
+  const model = useFalcorModel();
+  ...
+}
 ```

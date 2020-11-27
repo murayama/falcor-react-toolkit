@@ -1,6 +1,6 @@
-import React, { useReducer, useEffect, useContext } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { PathSet } from 'falcor';
-import { FalcorContext } from './FalcorProvider';
+import useFalcorModel from './useFalcorModel';
 
 interface State {
   loading: boolean;
@@ -41,7 +41,7 @@ const initialState : State = {loading: false, error: undefined, result: undefine
 
 export default (query: string | PathSet, normalizer?: FNormalizer): State => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { model } = useContext(FalcorContext);
+  const model = useFalcorModel();
   useEffect(() => {
     let unmounted: boolean = false;
     const fetch = async () => {
