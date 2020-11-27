@@ -4,29 +4,36 @@
   "description": "react falcor toolkit",
   "main": "dist/falcor-react-toolkit.js",
   "author": "murayama",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/murayama/falcor-react-toolkit"
+  },
   "license": "MIT",
   "files": [
     "dist/"
   ],
-  "dependencies": {
-    "falcor": "2.2.2",
-    "falcor-http-datasource": "0.1.3"
-  },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "falcor": "^2.0.0",
+    "falcor-http-datasource": "^0.1.3",
+    "react": ">=16.8.0"
   },
   "devDependencies": {
     "@types/falcor": "2.0.0",
+    "@types/html-webpack-plugin": "3.2.4",
     "@types/node": "12",
     "@types/react": "16.9.56",
-    "esbuild": "0.8.10",
+    "@types/react-dom": "16.9.9",
+    "@types/webpack": "4.41.25",
     "prettier": "2.1.2",
-    "react": "17.0.1",
+    "ts-loader": "8.0.11",
     "ts-node": "9.0.0",
-    "typescript": "4.0.5"
+    "typescript": "4.0.5",
+    "webpack": "4.44.2",
+    "webpack-cli": "4.2.0"
   },
   "scripts": {
-    "build:dev": "NODE_ENV=development node build.js",
-    "build:prod": "NODE_ENV=production node build.js"
+    "build:dev": "NODE_PATH=node_modules NODE_ENV=development webpack --config webpack.dev.js",
+    "build:prod": "NODE_PATH=node_modules NODE_ENV=production webpack --config webpack.prod.js",
+    "prepublishOnly": "yarn run build:prod"
   }
 }

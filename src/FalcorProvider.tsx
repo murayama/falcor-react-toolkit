@@ -1,11 +1,11 @@
 import React from 'react';
 import { Model } from 'falcor';
 
-interface Store {
+export interface Store {
   model?: Model
 }
 
-interface Props {
+export interface Props {
   children: React.ReactNode;
   model: Model;
 }

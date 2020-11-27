@@ -4,8 +4,8 @@ import { FalcorContext } from './FalcorProvider';
 
 interface State {
   loading: boolean;
-  error?: {};
-  result?: {};
+  error?: any;
+  result?: any;
 }
 
 interface Action {
@@ -14,8 +14,8 @@ interface Action {
   value?: {};
 }
 
-interface Normalizer {
-  (json: object): any;
+export interface FNormalizer {
+  (json: any): any;
 }
 
 const ActionType = {
@@ -26,20 +26,20 @@ const ActionType = {
 
 const reducer: React.Reducer<State, Action> = (state: State, action: Action) => {
   switch(action.type) {
-    case 'start':
+    case ActionType.START:
       return {loading: true, error: undefined, result: undefined};
-    case 'success':
+    case ActionType.SUCCESS:
       return {loading: false, error: undefined, result: action.value};
-    case 'error':
+    case ActionType.ERROR:
       return {loading: false, error: action.error, result: undefined};
     default:
       return state;
   }
 }
 
-const initialState = {loading: false, error: undefined, result: undefined};
+const initialState : State = {loading: false, error: undefined, result: undefined};
 
-export default (query: string | PathSet, normalizer?: Normalizer) => {
+export default (query: string | PathSet, normalizer?: FNormalizer): State => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { model } = useContext(FalcorContext);
   useEffect(() => {
@@ -54,7 +54,7 @@ export default (query: string | PathSet, normalizer?: Normalizer) => {
               if (normalizer) {
                 return normalizer(jsonEnvelope.json);
               } else {
-                jsonEnvelope.json;
+                return jsonEnvelope.json;
               }
             })();
             dispatch({type: ActionType.SUCCESS, value});
