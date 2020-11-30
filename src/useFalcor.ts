@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import { PathSet } from 'falcor';
-import useFalcorModel from './useFalcorModel';
+import useFalcorModel, { Batch } from './useFalcorModel';
 
 interface State {
   loading: boolean;
@@ -16,6 +16,11 @@ interface Action {
 
 export interface FNormalizer {
   (json: any): any;
+}
+
+export interface FOptions {
+  batch?: Batch;
+  normalizer?: FNormalizer;
 }
 
 const ActionType = {
@@ -39,9 +44,11 @@ const reducer: React.Reducer<State, Action> = (state: State, action: Action) => 
 
 const initialState : State = {loading: false, error: undefined, result: undefined};
 
-export default (query: string | PathSet, normalizer?: FNormalizer): State => {
+export default (query: string | PathSet, options: FOptions = {}): State => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const model = useFalcorModel();
+  const { batch, normalizer } = options;
+  const model = useFalcorModel(batch);
+
   useEffect(() => {
     let unmounted: boolean = false;
     const fetch = async () => {

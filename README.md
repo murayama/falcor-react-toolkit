@@ -30,7 +30,7 @@ return (
 )
 ```
 
-useFalcor hooks
+### useFalcor hooks
 
 ```javascript
 import React from 'react';
@@ -53,7 +53,7 @@ const App = (props) => {
 };
 ```
 
-useFalcor with normalizer
+### useFalcor with normalizer
 
 ```javascript
 import React from 'react';
@@ -66,7 +66,7 @@ const App = (props) => {
     .filter(([key, _]) => key !== '$__path')
     .map(([_, val]) => val);
   };
-  const {loading, error, result} = useFalcor(path, normalizer);
+  const {loading, error, result} = useFalcor(path, {normalizer});
 
   return (
       <div>
@@ -81,7 +81,31 @@ const App = (props) => {
 };
 ```
 
-useFalcorModel
+### useFalcor with batchModel
+
+```javascript
+import React from 'react';
+import { useFalcor } from 'falcor-react-toolkit';
+
+const App = (props) => {
+  const path = ['foo'];
+  const batch = {key: 'default-batch-model', delay: 100};
+  const {loading, error, result} = useFalcor(path, {batch});
+
+  return (
+      <div>
+      {loading && <span>Now Loading...</span>}
+      {!loading && (
+          <div>
+          {result.foo}
+          </div>
+          )}
+      </div>
+      )
+};
+```
+
+### useFalcorModel
 
 ```javascript
 import React from 'react';

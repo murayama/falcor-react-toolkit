@@ -7,14 +7,14 @@ interface Todo {
   done: boolean;
 }
 
-const normarizer : FNormalizer = (json) => {
+const normalizer : FNormalizer = (json) => {
   const todos = Object.entries(json.todos).filter(([key, _]) => key !== '$__path').map(([_, val]) => val);
   return todos;
 }
 
 function App() {
   const path = ['todos', {from: 0, to: 1}, ['name', 'done']];
-  const {loading, error, result} = useFalcor(path, normarizer);
+  const {loading, error, result} = useFalcor(path, {normalizer, batch: {delay: 100, key: 'default-batch-model'}});
   return (
     <div className="App">
       {loading && <div>Loading...</div>}
