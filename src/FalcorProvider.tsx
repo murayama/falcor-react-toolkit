@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useCallback, useRef} from 'react';
 import { Model } from 'falcor';
 
-interface batchModels {
+interface FBatchModels {
   [key: string]: Model
 }
+
 export interface Store {
   model?: Model;
-  batchModels?:batchModels;
-  addBatchModel: (key: string, model: Model) => void;
+  batchModels?: FBatchModels;
+  addBatchModel?: (key: string, model: Model) => void;
 }
 
 export interface Props {
@@ -15,25 +16,26 @@ export interface Props {
   model: Model;
 }
 
-const batchModels: batchModels = {};
-const addBatchModel = (key: string, batchModel: Model) => {
-  batchModels[key] = batchModel;
-}
-
 export const FalcorContext: React.Context<Store> = React.createContext<Store>({
   model: undefined,
-  batchModels: batchModels,
-  addBatchModel
+  batchModels: undefined,
+  addBatchModel: undefined
 });
 
 const FalcorProvider: React.FC<Props> = (props: Props): JSX.Element => {
   const {children, model} = props;
+  const batchModels = useRef<FBatchModels>({});
+
+  const addBatchModel = useCallback((key: string, batchModel: Model) => {
+    batchModels.current[key] = batchModel;
+  }, []);
+
   if (!model) {
     throw new Error('model is required');
   }
 
   return (
-    <FalcorContext.Provider value={{model, batchModels, addBatchModel}}>
+    <FalcorContext.Provider value={{model, batchModels: batchModels.current, addBatchModel}}>
       {children}
     </FalcorContext.Provider>
   );
