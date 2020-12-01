@@ -38,14 +38,14 @@ import { useFalcor } from 'falcor-react-toolkit';
 
 const App = (props) => {
   const path = ['foo'];
-  const {loading, error, result} = useFalcor(path);
+  const {loading, error, data} = useFalcor(path);
 
   return (
     <div>
       {loading && <span>Now Loading...</span>}
       {!loading && (
         <div>
-          {result.foo}
+          {data.foo}
         </div>
       )}
     </div>
@@ -66,14 +66,14 @@ const App = (props) => {
     .filter(([key, _]) => key !== '$__path')
     .map(([_, val]) => val);
   };
-  const {loading, error, result} = useFalcor(path, {normalizer});
+  const {loading, error, data} = useFalcor(path, {normalizer});
 
   return (
       <div>
       {loading && <span>Now Loading...</span>}
       {!loading && (
         <div>
-          {result.map(value => <div>{value}</div>)}
+          {data.map(value => <div>{value.name}</div>)}
         </div>
        )}
       </div>
@@ -90,14 +90,14 @@ import { useFalcor } from 'falcor-react-toolkit';
 const App = (props) => {
   const path = ['foo'];
   const batch = {key: 'default-batch-model', delay: 100};
-  const {loading, error, result} = useFalcor(path, {batch});
+  const {loading, error, data} = useFalcor(path, {batch});
 
   return (
       <div>
       {loading && <span>Now Loading...</span>}
       {!loading && (
           <div>
-          {result.foo}
+          {data.foo}
           </div>
           )}
       </div>

@@ -14,14 +14,14 @@ const normalizer : FNormalizer = (json) => {
 
 function App() {
   const path = ['todos', {from: 0, to: 1}, ['name', 'done']];
-  const {loading, error, result} = useFalcor(path, {normalizer, batch: {delay: 100, key: 'default-batch-model'}});
+  const {loading, error, data} = useFalcor(path, {normalizer, batch: {delay: 100, key: 'default-batch-model'}});
   return (
     <div className="App">
       {loading && <div>Loading...</div>}
       {!loading && (
         <div>
           <div>TODO</div>
-        {result && result.map((val: Todo, i: number) => (
+        {data && data.map((val: Todo, i: number) => (
           <div key={`todo-${i}`}>
             <input type="checkbox" name="" id="" checked={val.done}/>{val.name}
           </div>

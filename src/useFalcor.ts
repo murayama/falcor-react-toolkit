@@ -5,7 +5,7 @@ import useFalcorModel, { Batch } from './useFalcorModel';
 interface State {
   loading: boolean;
   error?: any;
-  result?: any;
+  data?: any;
 }
 
 interface Action {
@@ -32,17 +32,17 @@ const ActionType = {
 const reducer: React.Reducer<State, Action> = (state: State, action: Action) => {
   switch(action.type) {
     case ActionType.START:
-      return {loading: true, error: undefined, result: undefined};
+      return {loading: true, error: undefined, data: undefined};
     case ActionType.SUCCESS:
-      return {loading: false, error: undefined, result: action.value};
+      return {loading: false, error: undefined, data: action.value};
     case ActionType.ERROR:
-      return {loading: false, error: action.error, result: undefined};
+      return {loading: false, error: action.error, data: undefined};
     default:
       return state;
   }
 }
 
-const initialState : State = {loading: false, error: undefined, result: undefined};
+const initialState : State = {loading: false, error: undefined, data: undefined};
 
 export default (query: string | PathSet, options: FOptions = {}): State => {
   const [state, dispatch] = useReducer(reducer, initialState);
