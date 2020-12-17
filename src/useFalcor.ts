@@ -44,7 +44,7 @@ const reducer: React.Reducer<State, Action> = (state: State, action: Action) => 
 
 const initialState : State = {loading: false, error: undefined, data: undefined};
 
-export default (query: string | PathSet, options: FOptions = {}): State => {
+export default (query: string | PathSet | Function, options: FOptions = {}): State => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { batch, normalizer } = options;
   const model = useFalcorModel(batch);
@@ -55,7 +55,14 @@ export default (query: string | PathSet, options: FOptions = {}): State => {
       if (model && !unmounted) {
         dispatch({type: ActionType.START})
         try {
-          const jsonEnvelope = await model.get(query);
+          const _query = (() => {
+            if (typeof query == 'function') {
+              return query();
+            } else {
+              return query;
+            }
+          })();
+          const jsonEnvelope = await model.get(_query);
           if (!unmounted) {
             const value = (() => {
               if (normalizer) {
@@ -74,6 +81,7 @@ export default (query: string | PathSet, options: FOptions = {}): State => {
       }
     }
     fetch();
+
     return () => {
       unmounted = true;
     }

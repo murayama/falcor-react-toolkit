@@ -13,7 +13,8 @@ const normalizer : FNormalizer = (json) => {
 }
 
 function App() {
-  const path = ['todos', {from: 0, to: 1}, ['name', 'done']];
+  // const path = ['todos', {from: 0, to: 1}, ['name', 'done']];
+  const path = () => ['todos', {from: 0, to: 1}, ['name', 'done']];
   const {loading, error, data} = useFalcor(path, {normalizer, batch: {delay: 100, key: 'default-batch-model'}});
   return (
     <div className="App">
